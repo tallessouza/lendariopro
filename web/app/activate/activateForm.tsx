@@ -44,7 +44,7 @@ const ActivateForm = () => {
   const [timezone, setTimezone] = useState('Asia/Shanghai')
   const [language, setLanguage] = useState(locale)
   const [showSuccess, setShowSuccess] = useState(false)
-  const defaultLanguage = useCallback(() => (window.navigator.language.startsWith('zh') ? LanguagesSupported[1] : LanguagesSupported[0]) || LanguagesSupported[0], [])
+  const defaultLanguage = useCallback(() => (window.navigator.language.startsWith('pt') ? LanguagesSupported[1] : LanguagesSupported[0]) || LanguagesSupported[0], [])
 
   const showErrorMessage = useCallback((message: string) => {
     Toast.notify({
@@ -86,7 +86,7 @@ const ActivateForm = () => {
           timezone,
         },
       })
-      setLocaleOnClient(language.startsWith('en') ? 'en-US' : 'zh-Hans', false)
+      setLocaleOnClient(language.startsWith('en') ? 'en-US' : 'pt-BR', false)
       setShowSuccess(true)
     }
     catch {
@@ -111,7 +111,7 @@ const ActivateForm = () => {
           </div>
           <div className="w-full mx-auto mt-6">
             <Button type='primary' className='w-full !fone-medium !text-sm'>
-              <a href="https://dify.ai">{t('login.explore')}</a>
+              <a href="https://lendario.pro">{t('login.explore')}</a>
             </Button>
           </div>
         </div>
@@ -206,11 +206,11 @@ const ActivateForm = () => {
               <div className="block w-hull mt-2 text-xs text-gray-600">
                 {t('login.license.tip')}
                 &nbsp;
-                <Link
+                {/* <Link
                   className='text-primary-600'
                   target='_blank' rel='noopener noreferrer'
                   href={`https://docs.dify.ai/${language !== LanguagesSupported[1] ? 'user-agreement' : `v/${locale.toLowerCase()}/policies`}/open-source`}
-                >{t('login.license.link')}</Link>
+                >{t('login.license.link')}</Link> */}
               </div>
             </div>
           </div>

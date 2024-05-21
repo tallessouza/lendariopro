@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from typing import Optional
 
 import requests
-from flask import current_app, redirect, request
+from flask import current_app, redirect, request, jsonify
 from flask_restful import Resource
 
 from constants.languages import languages
@@ -124,5 +124,37 @@ def _generate_account(provider: str, user_info: OAuthUserInfo):
     return account
 
 
+class UserRegistration(Resource):
+    def post(self):
+        data = request.get_json()
+        email = data.get('email')
+        name = data.get('name')
+        password = data.get('password')
+        provider = data.get('provider')
+
+        if not email or not name or not password or not provider:
+            return {'error': 'Email, name, password and provider are required.'}, 400
+
+        existing_account = Account.query.filter_by(email=email).first()
+        if existing_account:
+            return {'error': 'Account with this email already exists.'}, 400
+
+        try:
+            account = RegisterService.register(
+                email=email,
+                name=name,
+                password=password,
+                open_id=None,
+                provider=provider
+            )
+            db.session.commit()
+        except Exception as e:
+            logging.exception(f"An error occurred during user registration: {e}")
+            return {'error': 'User registration failed.'}, 500
+
+        return {'message': 'User registered successfully.'}, 201
+
+
 api.add_resource(OAuthLogin, '/oauth/login/<provider>')
 api.add_resource(OAuthCallback, '/oauth/authorize/<provider>')
+api.add_resource(UserRegistration, '/register')
