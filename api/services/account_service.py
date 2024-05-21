@@ -438,15 +438,14 @@ class RegisterService:
             account.status = AccountStatus.ACTIVE.value if not status else status.value
             account.initialized_at = datetime.now(timezone.utc).replace(tzinfo=None)
 
-            if open_id is not None or provider is not None:
-                AccountService.link_account_integrate(provider, open_id, account)
-            if current_app.config['EDITION'] != 'SELF_HOSTED':
-                tenant = TenantService.create_tenant(f"{account.name}'s Workspace")
+            # if open_id is not None or provider is not None:
+            #     AccountService.link_account_integrate(provider, open_id, account)
+            # if current_app.config['EDITION'] != 'SELF_HOSTED':
+            tenant = TenantService.create_tenant(f"{account.name}'s Workspace")
 
-                TenantService.create_tenant_member(tenant, account, role='owner')
-                account.current_tenant = tenant
-
-                tenant_was_created.send(tenant)
+            TenantService.create_tenant_member(tenant, account, role='owner')
+            account.current_tenant = tenant
+            tenant_was_created.send(tenant)
 
             db.session.commit()
         except Exception as e:
