@@ -148,7 +148,6 @@ const NormalForm = () => {
         <h2 className="text-[32px] font-bold text-gray-900">Oi, vamos começar!👋</h2>
         <p className='mt-1 text-sm text-gray-600'>Bem-vindo ao Lab[IA], faça login para continuar.</p>
       </div>
-      <LogoSite />
       <div className="w-full mx-auto mt-8">
         <div className="bg-white ">
           {!IS_CE_EDITION && (
