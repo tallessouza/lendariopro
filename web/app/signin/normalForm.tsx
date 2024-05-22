@@ -11,6 +11,7 @@ import { IS_CE_EDITION, apiPrefix } from '@/config'
 import Button from '@/app/components/base/button'
 import { login, oauth } from '@/service/common'
 import { getPurifyHref } from '@/utils'
+import LogoSite from '../components/base/logo/logo-site'
 const validEmailReg = /^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$/
 
 type IState = {
@@ -143,11 +144,11 @@ const NormalForm = () => {
 
   return (
     <>
-      {/* <div className="w-full mx-auto">
-        <h2 className="text-[32px] font-bold text-gray-900">{t('login.pageTitle')}</h2>
-        <p className='mt-1 text-sm text-gray-600'>{t('login.welcome')}</p>
-      </div> */}
-
+      <div className="w-full mx-auto">
+        <h2 className="text-[32px] font-bold text-gray-900">Oi, vamos começar!👋</h2>
+        <p className='mt-1 text-sm text-gray-600'>Bem-vindo ao Lab[IA], faça login para continuar.</p>
+      </div>
+      <LogoSite />
       <div className="w-full mx-auto mt-8">
         <div className="bg-white ">
           {!IS_CE_EDITION && (
