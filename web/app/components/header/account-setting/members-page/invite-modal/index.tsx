@@ -37,10 +37,6 @@ const InviteModal = ({
       name: 'normal',
       description: t('common.members.normalTip'),
     },
-    {
-      name: 'admin',
-      description: t('common.members.adminTip'),
-    },
   ], [t])
   const [role, setRole] = useState(InvitingRoles[0])
 
