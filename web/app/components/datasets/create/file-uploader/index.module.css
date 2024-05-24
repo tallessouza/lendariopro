@@ -56,7 +56,7 @@
 
 .uploader .browse {
   @apply pl-1 cursor-pointer;
-  color: #155eef;
+  color: #d7b97f;
 }
 
 .fileList {

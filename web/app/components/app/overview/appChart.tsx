@@ -24,8 +24,8 @@ const COLOR_TYPE_MAP = {
     bgColor: ['rgba(254, 145, 87, 0.2)', 'rgba(255, 138, 76, 0.1)'],
   },
   blue: {
-    lineColor: 'rgba(28, 100, 242, 1)',
-    bgColor: ['rgba(28, 100, 242, 0.3)', 'rgba(28, 100, 242, 0.1)'],
+    lineColor: 'rgba(215, 185, 127, 1)',
+    bgColor: ['rgba(215, 185, 127, 0.3)', 'rgba(215, 185, 127, 0.1)'],
   },
 }
 

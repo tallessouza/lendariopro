@@ -347,7 +347,7 @@ const Metadata: FC<IMetadataProps> = ({ docDetail, loading, onUpdate }) => {
                     ·
                       <div
                         onClick={() => { setShowDocTypes(true) }}
-                        className='cursor-pointer hover:text-[#155EEF]'
+                        className='cursor-pointer hover:text-[#d7b97f]'
                       >
                         {t('common.operation.change')}
                       </div>

@@ -1,5 +1,5 @@
 const translation = {
-  title: 'Badać',
+  title: 'Explorar',
   sidebar: {
     discovery: 'Descoberta',
     chat: 'Chat',

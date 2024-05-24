@@ -49,7 +49,7 @@ const HistoryPanel: FC<Props> = ({
               ? 'https://docs.dify.ai/v/zh-hans/guides/application-design/prompt-engineering'
               : 'https://docs.dify.ai/features/prompt-engineering'}`}
             target='_blank' rel='noopener noreferrer'
-            className='text-[#155EEF]'>{t('appDebug.feature.conversationHistory.learnMore')}
+            className='text-[#d7b97f]'>{t('appDebug.feature.conversationHistory.learnMore')}
             </a>
           </div>
         </div>

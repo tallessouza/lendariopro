@@ -34,7 +34,7 @@ const UsageInfo: FC<Props> = ({
   const percent = usage / total * 100
   const color = (() => {
     if (percent < LOW)
-      return '#155EEF'
+      return '#d7b97f'
 
     if (percent < MIDDLE)
       return '#F79009'

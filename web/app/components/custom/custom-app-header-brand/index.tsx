@@ -26,8 +26,8 @@ const CustomAppHeaderBrand = () => {
             <div className='absolute left-0 right-0 bottom-0.5 h-[0.5px] bg-[#F97066] opacity-50'></div>
           </div>
           <div className='flex items-center mr-3 px-3 h-7 rounded-xl bg-white shadow-xs'>
-            <Grid01 className='shrink-0 mr-2 w-4 h-4 text-[#155eef]' />
-            <div className='w-12 h-1.5 rounded-[5px] bg-[#155eef] opacity-80'></div>
+            <Grid01 className='shrink-0 mr-2 w-4 h-4 text-[#d7b97f]' />
+            <div className='w-12 h-1.5 rounded-[5px] bg-[#d7b97f] opacity-80'></div>
           </div>
           <div className='flex items-center mr-3 px-3 h-7'>
             <Container className='shrink-0 mr-2 w-4 h-4 text-gray-500' />

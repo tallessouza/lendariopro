@@ -154,7 +154,7 @@ const ToolList: FC<Props> = ({
             <>
               <div>·</div>
               <div
-                className='flex items-center text-[#155EEF] cursor-pointer'
+                className='flex items-center text-[#d7b97f] cursor-pointer'
                 onClick={() => showSettingAuthModal()}
               >
                 <div>{t('tools.auth.setup')}</div>

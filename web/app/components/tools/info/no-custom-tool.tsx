@@ -26,7 +26,7 @@ const NoCustomTool: FC<Props> = ({
           {t('tools.noCustomTool.content')}
         </div>
         <div
-          className='mt-2 leading-[18px] text-xs font-medium text-[#155EEF] uppercase cursor-pointer'
+          className='mt-2 leading-[18px] text-xs font-medium text-[#d7b97f] uppercase cursor-pointer'
           onClick={onCreateTool}
         >
           {t('tools.noCustomTool.createTool')}

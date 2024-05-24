@@ -46,14 +46,14 @@ const SegmentAdd: FC<ISegmentAddProps> = ({
           <div className='inline-flex items-center mr-2 px-3 py-[6px] text-gray-700 bg-[#F6FEF9] rounded-lg border border-black/5'>
             <CheckCircle className='mr-2 w-4 h-4 text-[#039855]' />
             <span className='font-medium text-[13px] leading-[18px]'>{t('datasetDocuments.list.batchModal.completed')}</span>
-            <span className='pl-2 font-medium text-[13px] leading-[18px] text-[#155EEF] cursor-pointer' onClick={clearProcessStatus}>{t('datasetDocuments.list.batchModal.ok')}</span>
+            <span className='pl-2 font-medium text-[13px] leading-[18px] text-[#d7b97f] cursor-pointer' onClick={clearProcessStatus}>{t('datasetDocuments.list.batchModal.ok')}</span>
           </div>
         )}
         {importStatus === ProcessStatus.ERROR && (
           <div className='inline-flex items-center mr-2 px-3 py-[6px] text-red-600 bg-red-100 rounded-lg border border-black/5'>
             <AlertCircle className='mr-2 w-4 h-4 text-[#D92D20]' />
             <span className='font-medium text-[13px] leading-[18px]'>{t('datasetDocuments.list.batchModal.error')}</span>
-            <span className='pl-2 font-medium text-[13px] leading-[18px] text-[#155EEF] cursor-pointer' onClick={clearProcessStatus}>{t('datasetDocuments.list.batchModal.ok')}</span>
+            <span className='pl-2 font-medium text-[13px] leading-[18px] text-[#d7b97f] cursor-pointer' onClick={clearProcessStatus}>{t('datasetDocuments.list.batchModal.ok')}</span>
           </div>
         )}
       </>

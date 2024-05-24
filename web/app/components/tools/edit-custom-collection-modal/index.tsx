@@ -189,7 +189,7 @@ const EditCustomCollectionModal: FC<Props> = ({
                     <a
                       href="https://swagger.io/specification/"
                       target='_blank' rel='noopener noreferrer'
-                      className='flex items-center h-[18px] space-x-1  text-[#155EEF]'
+                      className='flex items-center h-[18px] space-x-1  text-[#d7b97f]'
                     >
                       <div className='text-xs font-normal'>{t('tools.createTool.viewSchemaSpec')}</div>
                       <LinkExternal02 className='w-3 h-3' />

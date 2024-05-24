@@ -111,7 +111,7 @@ const SelectDataSet: FC<ISelectDataSetProps> = ({
           }}
         >
           <span className='text-gray-500'>{t('appDebug.feature.dataSet.noDataSet')}</span>
-          <Link href="/datasets/create" className='font-normal text-[#155EEF]'>{t('appDebug.feature.dataSet.toCreate')}</Link>
+          <Link href="/datasets/create" className='font-normal text-[#d7b97f]'>{t('appDebug.feature.dataSet.toCreate')}</Link>
         </div>
       )}
 
