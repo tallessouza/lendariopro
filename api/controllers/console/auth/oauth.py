@@ -126,6 +126,12 @@ def _generate_account(provider: str, user_info: OAuthUserInfo):
 
 class UserRegistration(Resource):
     def post(self):
+        secret_key = current_app.config.get('SECRET_KEY')
+        auth_header = request.headers.get('Authorization')
+
+        if not auth_header or auth_header != secret_key:
+            return {'error': 'Unauthorized'}, 403
+
         data = request.get_json()
         email = data.get('email')
         name = data.get('name')
@@ -133,7 +139,7 @@ class UserRegistration(Resource):
         provider = data.get('provider')
 
         if not email or not name or not password or not provider:
-            return {'error': 'Email, name, password and provider are required.'}, 400
+            return {'error': 'Fields are required.'}, 400
 
         existing_account = Account.query.filter_by(email=email).first()
         if existing_account:
