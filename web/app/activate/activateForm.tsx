@@ -122,10 +122,10 @@ const ActivateForm = () => {
             <div className={`mb-3 flex justify-center items-center w-20 h-20 p-5 rounded-[20px] border border-gray-100 shadow-lg text-[40px] font-bold ${style.logo}`}>
             </div>
             <h2 className="text-[32px] font-bold text-gray-900">
-              {`${t('login.join')} ${checkRes.workspace_name}`}
+              {`${t('login.join')} de ${checkRes.workspace_name}`}
             </h2>
             <p className='mt-1 text-sm text-gray-600 '>
-              {`${t('login.joinTipStart')} ${checkRes.workspace_name} ${t('login.joinTipEnd')}`}
+              {`Você foi convidado à fazer parte de um workspace no Lab[IA]`}
             </p>
           </div>
 
@@ -200,18 +200,18 @@ const ActivateForm = () => {
                   className='w-full !fone-medium !text-sm'
                   onClick={handleActivate}
                 >
-                  {`${t('login.join')} ${checkRes.workspace_name}`}
+                  {`${t('login.join')} de ${checkRes.workspace_name}`}
                 </Button>
               </div>
-              <div className="block w-hull mt-2 text-xs text-gray-600">
+              {/* <div className="block w-hull mt-2 text-xs text-gray-600">
                 {t('login.license.tip')}
                 &nbsp;
-                {/* <Link
+                <Link
                   className='text-primary-600'
                   target='_blank' rel='noopener noreferrer'
                   href={`https://docs.dify.ai/${language !== LanguagesSupported[1] ? 'user-agreement' : `v/${locale.toLowerCase()}/policies`}/open-source`}
-                >{t('login.license.link')}</Link> */}
-              </div>
+                >{t('login.license.link')}</Link>
+              </div> */}
             </div>
           </div>
         </div>

@@ -17,13 +17,14 @@ const Activate = () => {
         cn(
           'flex w-full flex-col bg-white shadow rounded-2xl shrink-0',
           'space-between',
+          'max-h-screen overflow-y-auto'
         )
       }>
         <Header />
         <ActivateForm />
-        {/* <div className='px-8 py-6 text-sm font-normal text-gray-500'>
-          © {new Date().getFullYear()} Dify, Inc. All rights reserved.
-        </div> */}
+        <div className='px-8 py-6 text-sm font-normal text-gray-500'>
+          {new Date().getFullYear()} Lab[IA].
+        </div>
       </div>
     </div>
   )
