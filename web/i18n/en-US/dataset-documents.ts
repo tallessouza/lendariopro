@@ -4,6 +4,7 @@ const translation = {
     desc: 'All files of the Knowledge are shown here, and the entire Knowledge can be linked to Lab[IA] citations or indexed via the Chat plugin.',
     addFile: 'add file',
     addPages: 'Add Pages',
+    addUrl: 'Add URL',
     table: {
       header: {
         fileName: 'FILE NAME',

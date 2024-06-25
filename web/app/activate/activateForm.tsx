@@ -41,7 +41,7 @@ const ActivateForm = () => {
 
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
-  const [timezone, setTimezone] = useState('Asia/Shanghai')
+  const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone)
   const [language, setLanguage] = useState(locale)
   const [showSuccess, setShowSuccess] = useState(false)
   const defaultLanguage = useCallback(() => (window.navigator.language.startsWith('pt') ? LanguagesSupported[1] : LanguagesSupported[0]) || LanguagesSupported[0], [])
@@ -196,8 +196,8 @@ const ActivateForm = () => {
               </div>
               <div>
                 <Button
-                  type='primary'
-                  className='w-full !fone-medium !text-sm'
+                  variant='primary'
+                  className='w-full !text-sm'
                   onClick={handleActivate}
                 >
                   {`${t('login.join')} de ${checkRes.workspace_name}`}
@@ -227,7 +227,7 @@ const ActivateForm = () => {
             </h2>
           </div>
           <div className="w-full mx-auto mt-6">
-            <Button type='primary' className='w-full !fone-medium !text-sm'>
+            <Button variant='primary' className='w-full !text-sm'>
               <a href="/signin">{t('login.activated')}</a>
             </Button>
           </div>

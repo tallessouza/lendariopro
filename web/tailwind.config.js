@@ -88,4 +88,8 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
   ],
+  // https://github.com/tailwindlabs/tailwindcss/discussions/5969
+  corePlugins: {
+    preflight: false,
+  },
 }
