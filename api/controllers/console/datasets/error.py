@@ -73,7 +73,19 @@ class InvalidMetadataError(BaseHTTPException):
     code = 400
 
 
+class WebsiteCrawlError(BaseHTTPException):
+    error_code = 'crawl_failed'
+    description = "{message}"
+    code = 500
+
+
 class DatasetInUseError(BaseHTTPException):
     error_code = 'dataset_in_use'
     description = "The dataset is being used by some apps. Please remove the dataset from the apps before deleting it."
     code = 409
+
+
+class IndexingEstimateError(BaseHTTPException):
+    error_code = 'indexing_estimate_error'
+    description = "Knowledge indexing estimate failed: {message}"
+    code = 500

@@ -3,10 +3,10 @@ import logging
 from typing import Any, Optional
 from uuid import uuid4
 
-from flask import current_app
 from pydantic import BaseModel, model_validator
 from pymilvus import MilvusClient, MilvusException, connections
 
+from configs import dify_config
 from core.rag.datasource.entity.embedding import Embeddings
 from core.rag.datasource.vdb.field import Field
 from core.rag.datasource.vdb.vector_base import BaseVector
@@ -100,12 +100,6 @@ class MilvusVector(BaseVector):
                 raise e
         return pks
 
-    def delete_by_document_id(self, document_id: str):
-
-        ids = self.get_ids_by_metadata_field('document_id', document_id)
-        if ids:
-            self._client.delete(collection_name=self._collection_name, pks=ids)
-
     def get_ids_by_metadata_field(self, key: str, value: str):
         result = self._client.query(collection_name=self._collection_name,
                                     filter=f'metadata["{key}"] == "{value}"',
@@ -121,7 +115,8 @@ class MilvusVector(BaseVector):
             uri = "https://" + str(self._client_config.host) + ":" + str(self._client_config.port)
         else:
             uri = "http://" + str(self._client_config.host) + ":" + str(self._client_config.port)
-        connections.connect(alias=alias, uri=uri, user=self._client_config.user, password=self._client_config.password)
+        connections.connect(alias=alias, uri=uri, user=self._client_config.user, password=self._client_config.password,
+                            db_name=self._client_config.database)
 
         from pymilvus import utility
         if utility.has_collection(self._collection_name, using=alias):
@@ -136,7 +131,8 @@ class MilvusVector(BaseVector):
             uri = "https://" + str(self._client_config.host) + ":" + str(self._client_config.port)
         else:
             uri = "http://" + str(self._client_config.host) + ":" + str(self._client_config.port)
-        connections.connect(alias=alias, uri=uri, user=self._client_config.user, password=self._client_config.password)
+        connections.connect(alias=alias, uri=uri, user=self._client_config.user, password=self._client_config.password,
+                            db_name=self._client_config.database)
 
         from pymilvus import utility
         if utility.has_collection(self._collection_name, using=alias):
@@ -281,15 +277,14 @@ class MilvusVectorFactory(AbstractVectorFactory):
             dataset.index_struct = json.dumps(
                 self.gen_index_struct_dict(VectorType.MILVUS, collection_name))
 
-        config = current_app.config
         return MilvusVector(
             collection_name=collection_name,
             config=MilvusConfig(
-                host=config.get('MILVUS_HOST'),
-                port=config.get('MILVUS_PORT'),
-                user=config.get('MILVUS_USER'),
-                password=config.get('MILVUS_PASSWORD'),
-                secure=config.get('MILVUS_SECURE'),
-                database=config.get('MILVUS_DATABASE'),
+                host=dify_config.MILVUS_HOST,
+                port=dify_config.MILVUS_PORT,
+                user=dify_config.MILVUS_USER,
+                password=dify_config.MILVUS_PASSWORD,
+                secure=dify_config.MILVUS_SECURE,
+                database=dify_config.MILVUS_DATABASE,
             )
         )
