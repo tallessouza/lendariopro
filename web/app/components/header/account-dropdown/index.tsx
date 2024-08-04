@@ -119,8 +119,8 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
                         <div>{t('common.userProfile.emailSupport')}</div>
                         <ArrowUpRight className='hidden w-[14px] h-[14px] text-gray-500 group-hover:flex' />
                       </a>
-                    </Menu.Item>}s
-                    <Menu.Item>
+                    </Menu.Item>}
+                    {/* <Menu.Item>
                       <Link
                         className={classNames(itemClassName, 'group justify-between')}
                         href='https://github.com/langgenius/dify/discussions/categories/feedbacks'
