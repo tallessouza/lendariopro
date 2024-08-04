@@ -12,6 +12,7 @@ const translation = {
     cancel: 'Cancel',
     clear: 'Clear',
     save: 'Save',
+    saveAndEnable: 'Save & Enable',
     edit: 'Edit',
     add: 'Add',
     added: 'Added',
@@ -123,6 +124,7 @@ const translation = {
   },
   userProfile: {
     settings: 'Settings',
+    emailSupport: 'Email Support',
     workspace: 'Workspace',
     createWorkspace: 'Create Workspace',
     helpCenter: 'Help',
@@ -180,6 +182,8 @@ const translation = {
     builderTip: 'Can build & edit own apps',
     editor: 'Editor',
     editorTip: 'Can build & edit apps',
+    datasetOperator: 'Knowledge Admin',
+    datasetOperatorTip: 'Only can manage the knowledge base',
     inviteTeamMember: 'Add team member',
     inviteTeamMemberTip: 'They can access your team data directly after signing in.',
     email: 'Email',
@@ -439,7 +443,7 @@ const translation = {
     latestAvailable: 'Lab[IA] {{version}} is the latest version available.',
   },
   appMenus: {
-    overview: 'Overview',
+    overview: 'Monitoring',
     promptEng: 'Orchestrate',
     apiAccess: 'API Access',
     logAndAnn: 'Logs & Ann.',

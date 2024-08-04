@@ -12,6 +12,7 @@ const translation = {
     cancel: '取消',
     clear: '清空',
     save: '保存',
+    saveAndEnable: '保存并启用',
     edit: '编辑',
     add: '添加',
     added: '已添加',
@@ -123,6 +124,7 @@ const translation = {
   },
   userProfile: {
     settings: '设置',
+    emailSupport: '邮件支持',
     workspace: '工作空间',
     createWorkspace: '创建工作空间',
     helpCenter: '帮助文档',
@@ -178,6 +180,8 @@ const translation = {
     normalTip: '只能使用应用程序，不能建立应用程序',
     editor: '编辑',
     editorTip: '能够建立并编辑应用程序，不能管理团队设置',
+    datasetOperator: '知识库管理员',
+    datasetOperatorTip: '只能管理知识库',
     inviteTeamMember: '添加团队成员',
     inviteTeamMemberTip: '对方在登录后可以访问你的团队数据。',
     email: '邮箱',
@@ -435,7 +439,7 @@ const translation = {
     latestAvailable: 'Lab[IA] {{version}} 已是最新版本。',
   },
   appMenus: {
-    overview: '概览',
+    overview: '监测',
     promptEng: '编排',
     apiAccess: '访问 API',
     logAndAnn: '日志与标注',

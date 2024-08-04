@@ -1,8 +1,9 @@
 import json
+from collections.abc import Mapping
 from copy import deepcopy
 from datetime import datetime, timezone
 from mimetypes import guess_type
-from typing import Union
+from typing import Any, Optional, Union
 
 from yarl import URL
 
@@ -10,6 +11,7 @@ from core.app.entities.app_invoke_entities import InvokeFrom
 from core.callback_handler.agent_tool_callback_handler import DifyAgentCallbackHandler
 from core.callback_handler.workflow_tool_callback_handler import DifyWorkflowCallbackHandler
 from core.file.file_obj import FileTransferMethod
+from core.ops.ops_trace_manager import TraceQueueManager
 from core.tools.entities.tool_entities import ToolInvokeMessage, ToolInvokeMessageBinary, ToolInvokeMeta, ToolParameter
 from core.tools.errors import (
     ToolEngineInvokeError,
@@ -32,10 +34,12 @@ class ToolEngine:
     Tool runtime engine take care of the tool executions.
     """
     @staticmethod
-    def agent_invoke(tool: Tool, tool_parameters: Union[str, dict],
-                     user_id: str, tenant_id: str, message: Message, invoke_from: InvokeFrom,
-                     agent_tool_callback: DifyAgentCallbackHandler) \
-                        -> tuple[str, list[tuple[MessageFile, bool]], ToolInvokeMeta]:
+    def agent_invoke(
+        tool: Tool, tool_parameters: Union[str, dict],
+        user_id: str, tenant_id: str, message: Message, invoke_from: InvokeFrom,
+        agent_tool_callback: DifyAgentCallbackHandler,
+        trace_manager: Optional[TraceQueueManager] = None
+    ) -> tuple[str, list[tuple[MessageFile, bool]], ToolInvokeMeta]:
         """
         Agent invokes the tool with the given arguments.
         """
@@ -43,7 +47,7 @@ class ToolEngine:
         if isinstance(tool_parameters, str):
             # check if this tool has only one parameter
             parameters = [
-                parameter for parameter in tool.get_runtime_parameters() 
+                parameter for parameter in tool.get_runtime_parameters() or []
                 if parameter.form == ToolParameter.ToolParameterForm.LLM
             ]
             if parameters and len(parameters) == 1:
@@ -83,9 +87,11 @@ class ToolEngine:
 
             # hit the callback handler
             agent_tool_callback.on_tool_end(
-                tool_name=tool.identity.name, 
-                tool_inputs=tool_parameters, 
-                tool_outputs=plain_text
+                tool_name=tool.identity.name,
+                tool_inputs=tool_parameters,
+                tool_outputs=plain_text,
+                message_id=message.id,
+                trace_manager=trace_manager
             )
 
             # transform tool invoke message to get LLM friendly message
@@ -118,11 +124,11 @@ class ToolEngine:
         return error_response, [], ToolInvokeMeta.error_instance(error_response)
 
     @staticmethod
-    def workflow_invoke(tool: Tool, tool_parameters: dict,
-                        user_id: str, workflow_id: str, 
+    def workflow_invoke(tool: Tool, tool_parameters: Mapping[str, Any],
+                        user_id: str,
                         workflow_tool_callback: DifyWorkflowCallbackHandler,
-                        workflow_call_depth: int) \
-                              -> list[ToolInvokeMessage]:
+                        workflow_call_depth: int,
+                        ) -> list[ToolInvokeMessage]:
         """
         Workflow invokes the tool with the given arguments.
         """
@@ -136,13 +142,15 @@ class ToolEngine:
             if isinstance(tool, WorkflowTool):
                 tool.workflow_call_depth = workflow_call_depth + 1
 
-            response = tool.invoke(user_id, tool_parameters)
+            if tool.runtime and tool.runtime.runtime_parameters:
+                tool_parameters = {**tool.runtime.runtime_parameters, **tool_parameters}
+            response = tool.invoke(user_id=user_id, tool_parameters=tool_parameters)
 
             # hit the callback handler
             workflow_tool_callback.on_tool_end(
-                tool_name=tool.identity.name, 
-                tool_inputs=tool_parameters, 
-                tool_outputs=response
+                tool_name=tool.identity.name,
+                tool_inputs=tool_parameters,
+                tool_outputs=response,
             )
 
             return response
@@ -250,7 +258,7 @@ class ToolEngine:
         agent_message: Message,
         invoke_from: InvokeFrom,
         user_id: str
-    ) -> list[tuple[MessageFile, bool]]:
+    ) -> list[tuple[Any, str]]:
         """
         Create message file
 
@@ -291,7 +299,7 @@ class ToolEngine:
             db.session.refresh(message_file)
 
             result.append((
-                message_file,
+                message_file.id,
                 message.save_as
             ))
 
